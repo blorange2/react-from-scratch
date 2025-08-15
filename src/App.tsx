@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import { PageWrapper } from "./components/PageWrapper";
 import { Container } from "./components/Container";
 import { Header } from "./components/Header";
@@ -20,6 +22,8 @@ export function App() {
 }
 
 function Main() {
+  const [liked, setLiked] = useState<number[]>([1, 3]);
+
   return (
     <main>
       {/* Search & Shortlist */}
@@ -30,7 +34,7 @@ function Main() {
         <Shortlist />
       </div>
       {/* Puppies list */}
-      <PuppiesList puppies={puppies} />
+      <PuppiesList puppies={puppies} liked={liked} setLiked={setLiked} />
       {/* New Puppy form */}
       <NewPuppyForm />
     </main>

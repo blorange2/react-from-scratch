@@ -1,13 +1,23 @@
 import { Heart } from "lucide-react";
 import { useState } from "react";
 
-export function LikeToggle() {
-  const [isLiked, setIsLiked] = useState(false);
-  const [count, setCount] = useState(0);
+export function LikeToggle({
+  liked,
+  setLiked,
+  puppyId,
+}: {
+  liked: number[];
+  setLiked: Dispatch<SetStateAction<number[]>>;
+  puppyId: number;
+}) {
+  const isLiked = liked.includes(puppyId);
 
   const handleClick = () => {
-    setIsLiked(!isLiked);
-    setCount((prevCount) => (isLiked ? prevCount - 1 : prevCount + 1));
+    setLiked((prevLiked) =>
+      isLiked
+        ? prevLiked.filter((id) => id !== puppyId)
+        : [...prevLiked, puppyId],
+    );
   };
 
   return (
@@ -19,7 +29,6 @@ export function LikeToggle() {
             : "stroke-slate-200 group-hover:stroke-slate-300"
         }
       />
-      <span>{count}</span>
     </button>
   );
 }
